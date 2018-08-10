@@ -1,0 +1,63 @@
+{% extends 'skywalker/base.html' %}
+
+{% block content %}
+<div class="tab-content">
+  <div class="container">
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <form role="form" method="post">
+            {% csrf_token %}
+
+            {% block form %}
+            <h2> <small>Ficha da Turma</small></h2>
+            <hr class="colorgraph">
+            <div class="form-group">
+                <input type="text" name="nome" id="nome" class="form-control input-lg" placeholder="Nome" tabindex="3" value="{{instance.nome}}">
+            </div>
+            <div class="form-group">
+                <input type="text" name="idioma" id="idioma" class="form-control input-lg" placeholder="Idioma" tabindex="3" value="{{instance.idioma}}">
+            </div>
+            <h2> <small>Alunos matriculados</small></h2>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                  <thead>
+                    <tr>
+                        <th><em class="fa fa-cog"></em></th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>SIAP</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    {% for item in lista %}
+                          <tr>
+                            <td align="center">
+                              <a href="{% url 'delete_subscriber' item.aluno.id item.turma.codigo %}"><button type="button" class="btn btn-danger btn btn-sm btn-primary btn-create">Remover</button></a>
+                            </td>
+                            <td class="hidden-xs">{{item.aluno.id}}</td>
+                            <td>{{item.aluno.username}}</td>
+                            <td>{{item.aluno.email}}</td>
+                            <td>{{item.aluno.siap}}</td>
+                          </tr>
+                    {% endfor %}
+                        </tbody>
+                </table>
+            
+              </div>
+            
+            <hr class="colorgraph">
+            <div class="row">                        
+                <div class="col-xs-6 col-md-6"><input type="submit" value="Salvar" class="btn btn-success btn-block btn-lg"></div>
+            </div>
+            {% endblock %}
+        </form>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
