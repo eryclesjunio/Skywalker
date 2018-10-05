@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+#add installed app called skywalker
 
 INSTALLED_APPS = [
     'django.contrib.admin',
